@@ -17,9 +17,12 @@ pipeline {
                 git 'https://github.com/alikayim/magento.git'
                 script{
                     sh """
+                    docker-compose stop
                     ls -lrt
                     pwd
                     docker-compose up -d
+                    docker exec -it spectrum-pipeline_master_web_1 install-magento
+                    docker exec -it spectrum-pipeline_master_web_1 install-sampledata
                     """
                 }
                 
