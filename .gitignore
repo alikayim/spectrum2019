@@ -1,0 +1,15 @@
+build/
+.gradle/
+gradle/
+.idea/
+.classpath
+.project
+.settings/
+bin/
+tools/
+test-output/
+classes/
+/*.iml
+out/
+.allure/
+allure-results/
