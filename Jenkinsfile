@@ -1,9 +1,5 @@
 pipeline {
     agent none
-    tools {
-    }
-    environment {
-    }
     stages {
         stage('Commit Stage') {
             steps {
