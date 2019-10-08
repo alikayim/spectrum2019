@@ -18,6 +18,7 @@ pipeline {
                 script{
                     sh """
                     ls -lrt
+                    pwd
                     docker-compose up -d
                     """
                 }
