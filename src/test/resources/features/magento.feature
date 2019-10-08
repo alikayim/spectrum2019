@@ -3,7 +3,7 @@ Feature: Magento Feature
   Scenario: Test
     Given I open "magento" page
     And I maximize window
-    And I login with user melike
+    And I create a user
     And I select Woman element
     And I select Tops element
     And I click Jacket element
@@ -18,8 +18,11 @@ Feature: Magento Feature
     And I click first product compare element
     And I click Compare element
     And I select cheapest of product 1, product 2, product 3
-    And I click add wish list element
-    And I select wish product element
+    And I click wish product element
+    And I click size element
+    And I click color element
+    And I click product add to cart element
+
     And I select Gear element
     And I click Fitness Equipment element
     And I click "Sprite Yoga Companion Kit"
@@ -32,4 +35,28 @@ Feature: Magento Feature
       | sprite count | 2 |
       | roller count | 1 |
     And I click add to cart element
+    And I click basket element
+    And I check final amount is lower than "150"
+    And I click proceed to checkout element
+    And I select "TR" in Country
+    And I fill:
+      | Company | Snapbytes - B.K.M.                 |
+      | Street  | Akmerkez B Kule Kat 4 Agile 5 Room |
+      | City    | Istanbul                           |
+      | State   | Besiktas                           |
+      | Zip     | 34100                              |
+      | Phone   | 02122121212                        |
+    And I click Next element
+    And I click biling check element
+    And I select "TR" in Country
+    And I fill:
+      | Biling Company | Home              |
+      | Biling Street  | Maltepe - Cevizli |
+      | Biling City    | Istanbul          |
+      | Biling State   | Maltepe           |
+      | Biling Zip     | 34150             |
+      | Biling Phone   | 02162161616       |
+    And I click Update element
+    And  I click Place Order element
+
 

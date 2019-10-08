@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -28,15 +30,29 @@ import static org.hamcrest.Matchers.*;
 public class Steps {
     WebDriver webDriver;
     Logger logger = LoggerFactory.getLogger(Steps.class);
+    ChromeOptions options;
 
 
     @Given("^I open \"([^\"]*)\" page$")
     public void openWebPage(String pageKey) throws IOException, ParseException, InterruptedException {
         String driverType = getPropertyKey("driver.type");
+        String headless = System.getProperty("headless");
+
         String url = getPropertyKey("web.url");
         if (driverType.equals("CHROME")) {
-            WebDriverManager.chromedriver().setup();
-            webDriver = new ChromeDriver();
+            if (headless == "true") {
+                options = new ChromeOptions();
+                options.addArguments("--headless");
+                options.addArguments("--disable-gpu");
+                options.addArguments("--no-sandbox");
+                WebDriverManager.chromedriver().setup();
+                webDriver = new ChromeDriver(options);
+
+            } else {
+                WebDriverManager.chromedriver().setup();
+                webDriver = new ChromeDriver();
+            }
+
         } else if (driverType.equals("FIREFOX")) {
             WebDriverManager.firefoxdriver().setup();
             webDriver = new FirefoxDriver();
@@ -201,7 +217,6 @@ public class Steps {
         for (int i = 0; i < webElements.size(); i++) {
             if ((Float.parseFloat(webElements.get(i).getAttribute("data-price-amount")) == productsPrice[0])) {
                 element = webElements.get(i);
-                System.out.println("En Ucuz : " + webElements.get(i).getAttribute("data-price-amount"));
                 int y = i + 1;
                 webDriver.findElement(By.xpath("//*[@id=\"product-comparison\"]/tbody[1]/tr/td[" + y + "]/div[3]/div[2]/a")).click();
             }
@@ -213,25 +228,26 @@ public class Steps {
         JSONParser parser = new JSONParser();
         Random random = new Random();
         clickText("Create an Account");
-        fill("createFirstName","Test");
-        fill("createLastName","User");
-        fill("createMail","test"+ Integer.toString(random.nextInt()) + "@test.com");
-        fill("createPass","Test1234");
-        fill("confirmPass","Test1234");
+        fill("createFirstName", "Test");
+        fill("createLastName", "User");
+        fill("createMail", "test" + Integer.toString(random.nextInt()) + "@test.com");
+        fill("createPass", "Test1234");
+        fill("confirmPass", "Test1234");
         clickElement("createButton");
-//        JSONObject obj = new JSONObject();
-//        obj.put("username", "test");
-//        obj.put("Author", "App Shah");
-//        JSONArray company = new JSONArray();
-//        company.add("Compnay: eBay");
-//        company.add("Compnay: Paypal");
-//        company.add("Compnay: Google");
-//        obj.put("Company List", company);
-//        try (FileWriter file = new FileWriter("src/test/resources/config/tempusers.json")) {
-//            file.write(obj.toJSONString());
-//            System.out.println("Successfully Copied JSON Object to File...");
-//            System.out.println("\nJSON Object: " + obj);
-//        }
+
+    }
+
+
+    @And("I check final amount is lower than {string}")
+    public void checkAmount(String amountValue) throws IOException, ParseException {
+        String amountText = getElement("amount").getText();
+        amountText = amountText.substring(1);
+
+        float amount = Float.parseFloat(amountText);
+        float amountExpected = Float.parseFloat(amountValue);
+        logger.info("Total Amount : " + amount);
+        assertThat(amountExpected, greaterThan(amount));
+
     }
 
 }
