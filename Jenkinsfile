@@ -15,6 +15,9 @@ pipeline {
             }
             steps {
                 git 'https://github.com/alikayim/magento.git'
+                script{
+                    sh 'ls -lrt'
+                }
                 
             }
         }
