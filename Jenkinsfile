@@ -35,7 +35,7 @@ pipeline {
                     }
                     steps {
                         script {
-                            sh 'gradle -Dheadless=true test allureReport'
+                            sh 'gradle test allureReport'
                         }
                     }
                     post {
@@ -67,7 +67,7 @@ pipeline {
                     }
                     steps {
                         script {
-                            sh 'gradle -Dheadless=true test allureReport'
+                            sh 'gradle -Pdriver.type=FIREFOX test allureReport'
                         }
                     }
                 }
