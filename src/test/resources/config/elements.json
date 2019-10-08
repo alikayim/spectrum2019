@@ -1,11 +1,27 @@
 {
   "elements": {
+    "loginMail": "email",
+    "loginPass": "pass",
+    "loginButton": "send2",
     "Woman": "ui-id-4",
     "Tops": "ui-id-9",
     "Jacket": "ui-id-11",
-    "loginMail": "email",
-    "loginPass": "pass",
-    "loginButton": "send2"
-
+    "Sorter": "//*[@id=\"maincontent\"]/div[3]/div[1]/div[2]/div[4]/select",
+    "first product": "//*[@id=\"maincontent\"]/div[3]/div[1]/div[3]/ol/li[1]",
+    "first product compare": "//*[@id=\"maincontent\"]/div[3]/div[1]/div[3]/ol/li[1]/div/div/div[4]/div/div[2]/a[2]",
+    "medium product": "//*[@id=\"maincontent\"]/div[3]/div[1]/div[3]/ol/li[2]",
+    "medium product compare": "//*[@id=\"maincontent\"]/div[3]/div[1]/div[3]/ol/li[2]/div/div/div[4]/div/div[2]/a[2]",
+    "sorter direction": "//*[@id=\"maincontent\"]/div[3]/div[1]/div[2]/div[4]/a",
+    "Compare": "//*[@id=\"maincontent\"]/div[3]/div[3]/div[1]/div[2]/div/div[1]/a",
+    "add wish list": "//*[@id=\"product-comparison\"]/tbody[1]/tr/td[1]/div[3]/div[2]/a",
+    "Gear": "ui-id-6",
+    "Fitness Equipment": "ui-id-26",
+    "Customize and Add to Cart": "//*[@id=\"bundle-slide\"]",
+    "Sprite Stasis Ball 75 cm": "//*[@id=\"product-options-wrapper\"]/div/fieldset/div[1]/div/div/div[3]",
+    "brick count": "bundle-option-2-qty-input",
+    "Sprite Yoga Strap 8 foot": "//*[@id=\"product-options-wrapper\"]/div/fieldset/div[3]/div/div/div[2]",
+    "sprite count": "bundle-option-3-qty-input",
+    "roller count": "bundle-option-4-qty-input",
+    "add to cart" : "product-addtocart-button"
   }
 }

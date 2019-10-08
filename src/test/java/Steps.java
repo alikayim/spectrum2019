@@ -148,6 +148,10 @@ public class Steps {
         selectBox.selectByVisibleText(selectValue);
     }
 
+    public WebElement waiForElement(WebElement element) {
+       return new WebDriverWait(webDriver, getElementLoadTimeOut()).until(ExpectedConditions.elementToBeClickable(element));
+
+    }
     @And("I login with user (\\w+(?: \\w+)*)")
     public void login(String userKey) throws IOException, ParseException {
         JSONParser parser = new JSONParser();
@@ -168,6 +172,7 @@ public class Steps {
         webDriver.findElement(By.partialLinkText(text)).click();
     }
 
+
     @And("I fill:")
     public void fillDataMap(Map<String, String> dataMap) {
         for (Map.Entry<String, String> item : dataMap.entrySet()) {
@@ -179,7 +184,16 @@ public class Steps {
         }
     }
 
-    public void fill(String key, String value) throws IOException, ParseException {
-        getElement(key).sendKeys(value);
+    public void fill(String elementKey, String value) throws IOException, ParseException {
+        clearText(elementKey);
+        getElement(elementKey).sendKeys(value);
+    }
+    public void clearText(String elementKey) throws IOException, ParseException {
+        getElement(elementKey).clear();
+    }
+
+    @And("I maximize window")
+    public void maximizeWindows() {
+        webDriver.manage().window().maximize();
     }
 }
