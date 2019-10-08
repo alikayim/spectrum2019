@@ -38,11 +38,11 @@ public class Steps {
     @Given("^I open \"([^\"]*)\" page$")
     public void openWebPage(String pageKey) throws IOException, ParseException, InterruptedException {
         String driverType = getPropertyKey("driver.type");
-        String headless = System.getProperty("headless");
+        String headless = getPropertyKey("headless");
 
         String url = getPropertyKey("web.url");
         if (driverType.equals("CHROME")) {
-            if (headless == "true") {
+            if (headless.equals("true")) {
                 chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--headless");
                 chromeOptions.addArguments("--disable-gpu");
@@ -56,7 +56,7 @@ public class Steps {
             }
 
         } else if (driverType.equals("FIREFOX")) {
-            if (headless == "true") {
+            if (headless.equals("true")) {
                 firefoxOptions = new FirefoxOptions();
                 firefoxOptions.setHeadless(true);
                 WebDriverManager.firefoxdriver().setup();
