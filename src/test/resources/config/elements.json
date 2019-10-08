@@ -2,6 +2,10 @@
   "elements": {
     "Woman": "ui-id-4",
     "Tops": "ui-id-9",
-    "Jacket": "ui-id-11"
+    "Jacket": "ui-id-11",
+    "loginMail": "email",
+    "loginPass": "pass",
+    "loginButton": "send2"
+
   }
 }

@@ -148,4 +148,38 @@ public class Steps {
         selectBox.selectByVisibleText(selectValue);
     }
 
+    @And("I login with user (\\w+(?: \\w+)*)")
+    public void login(String userKey) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader("src/test/resources/config/users.json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        JSONObject returnObject = (JSONObject) jsonObject.get(userKey);
+        String username = returnObject.get("username").toString();
+        String password = returnObject.get("password").toString();
+        clickText("Sign In");
+        fill("loginMail",username);
+        fill("loginPass",password);
+        clickElement("loginButton");
+    }
+
+
+    @And("I click {string}")
+    public void clickText(String text) throws IOException, ParseException {
+        webDriver.findElement(By.partialLinkText(text)).click();
+    }
+
+    @And("I fill:")
+    public void fillDataMap(Map<String, String> dataMap) {
+        for (Map.Entry<String, String> item : dataMap.entrySet()) {
+            try {
+                fill(item.getKey(), item.getValue());
+            } catch (Exception e) {
+                throw new RuntimeException("Exception while filling " + item.getKey(), e);
+            }
+        }
+    }
+
+    public void fill(String key, String value) throws IOException, ParseException {
+        getElement(key).sendKeys(value);
+    }
 }
