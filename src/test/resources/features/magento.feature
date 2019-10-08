@@ -17,7 +17,9 @@ Feature: Magento Feature
     And I select first product element
     And I click first product compare element
     And I click Compare element
+    And I select cheapest of product 1, product 2, product 3
     And I click add wish list element
+    And I select wish product element
     And I select Gear element
     And I click Fitness Equipment element
     And I click "Sprite Yoga Companion Kit"
@@ -30,3 +32,4 @@ Feature: Magento Feature
       | sprite count | 2 |
       | roller count | 1 |
     And I click add to cart element
+

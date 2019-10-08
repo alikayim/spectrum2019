@@ -22,6 +22,11 @@
     "Sprite Yoga Strap 8 foot": "//*[@id=\"product-options-wrapper\"]/div/fieldset/div[3]/div/div/div[2]",
     "sprite count": "bundle-option-3-qty-input",
     "roller count": "bundle-option-4-qty-input",
-    "add to cart" : "product-addtocart-button"
+    "add to cart": "product-addtocart-button",
+    "product 1": "//*[@id=\"product-comparison\"]/tbody[1]/tr/td[1]/div[2]/span/span/span[2]",
+    "product 2": "//*[@id=\"product-comparison\"]/tbody[1]/tr/td[2]/div[2]/span/span/span[2]",
+    "product 3": "//*[@id=\"product-comparison\"]/tbody[1]/tr/td[3]/div[2]/span/span/span[2]",
+    "wish product" : "item_38",
+    "add to cart wish element" : "//*[@id=\"item_40\"]/div/div[3]/div[2]/fieldset/div[2]/div/button"
   }
 }

@@ -1,19 +1,15 @@
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,13 +17,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
-import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -69,7 +63,7 @@ public class Steps {
 
     @And("I click (\\w+(?: \\w+)*) element")
     public void clickElement(String elementKey) throws IOException, ParseException {
-        getElement(elementKey).click();
+        waiForElement(getElement(elementKey)).click();
     }
 
 
@@ -142,36 +136,26 @@ public class Steps {
     }
 
 
-    @And("I select (\\w+(?: \\w+)*) in (\\w+(?: \\w+)*)")
+    @And("I select \"([^\"]*)\" in (\\w+(?: \\w+)*)")
     public void selectElementInBox(String selectValue, String selectKey) throws IOException, ParseException {
         Select selectBox = new Select(getElement(selectKey));
-        selectBox.selectByVisibleText(selectValue);
+        selectBox.selectByValue(selectValue);
     }
 
-    public WebElement waiForElement(WebElement element) {
-       return new WebDriverWait(webDriver, getElementLoadTimeOut()).until(ExpectedConditions.elementToBeClickable(element));
-
+    @And("I maximize window")
+    public void maximizeWindow() {
+        webDriver.manage().window().maximize();
     }
-    @And("I login with user (\\w+(?: \\w+)*)")
-    public void login(String userKey) throws IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        Object obj = parser.parse(new FileReader("src/test/resources/config/users.json"));
-        JSONObject jsonObject = (JSONObject) obj;
-        JSONObject returnObject = (JSONObject) jsonObject.get(userKey);
-        String username = returnObject.get("username").toString();
-        String password = returnObject.get("password").toString();
-        clickText("Sign In");
-        fill("loginMail",username);
-        fill("loginPass",password);
-        clickElement("loginButton");
-    }
-
 
     @And("I click {string}")
-    public void clickText(String text) throws IOException, ParseException {
+    public void clickText(String text) {
         webDriver.findElement(By.partialLinkText(text)).click();
     }
 
+    public WebElement waiForElement(WebElement element) {
+        return new WebDriverWait(webDriver, getElementLoadTimeOut()).until(ExpectedConditions.elementToBeClickable(element));
+
+    }
 
     @And("I fill:")
     public void fillDataMap(Map<String, String> dataMap) {
@@ -184,16 +168,49 @@ public class Steps {
         }
     }
 
-    public void fill(String elementKey, String value) throws IOException, ParseException {
-        clearText(elementKey);
-        getElement(elementKey).sendKeys(value);
+    public void fill(String key, String value) throws IOException, ParseException {
+        clearInput(key);
+        getElement(key).sendKeys(value);
     }
-    public void clearText(String elementKey) throws IOException, ParseException {
+
+    public void clearInput(String elementKey) throws IOException, ParseException {
         getElement(elementKey).clear();
     }
 
-    @And("I maximize window")
-    public void maximizeWindows() {
-        webDriver.manage().window().maximize();
+    @And("I login with user (\\w+(?: \\w+)*)")
+    public void login(String userKey) throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(new FileReader("src/test/resources/config/users.json"));
+        JSONObject jsonObject = (JSONObject) obj;
+        JSONObject returnObject = (JSONObject) jsonObject.get(userKey);
+        String username = returnObject.get("username").toString();
+        String password = returnObject.get("password").toString();
+        clickText("Sign In");
+        fill("loginMail", username);
+        fill("loginPass", password);
+        clickElement("loginButton");
     }
+
+    @And("I select cheapest of (\\w+(?: \\w+)*), (\\w+(?: \\w+)*), (\\w+(?: \\w+)*)")
+    public void compareProductsPrice(String product1, String product2, String product3) throws IOException, ParseException {
+        float productsPrice[] = new float[3];
+        String productDetail = "//*[@id='product-comparison']/tbody[1]/tr/td/div[2]/span/span/span[2]";
+        productsPrice[0] = Float.parseFloat(getElement(product1).getAttribute("data-price-amount"));
+        productsPrice[1] = Float.parseFloat(getElement(product2).getAttribute("data-price-amount"));
+        productsPrice[2] = Float.parseFloat(getElement(product3).getAttribute("data-price-amount"));
+        Arrays.sort(productsPrice);
+        WebElement element;
+        List<WebElement> webElements = webDriver.findElements(By.xpath(productDetail));
+        for (int i = 0; i < webElements.size(); i++) {
+            if ((Float.parseFloat(webElements.get(i).getAttribute("data-price-amount")) == productsPrice[0])) {
+                element = webElements.get(i);
+                System.out.println("En Ucuz : " + webElements.get(i).getAttribute("data-price-amount"));
+                int y = i + 1;
+                webDriver.findElement(By.xpath("//*[@id=\"product-comparison\"]/tbody[1]/tr/td[" + y + "]/div[3]/div[2]/a")).click();
+            }
+
+        }
+    }
+
+
 }
