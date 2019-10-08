@@ -12,7 +12,7 @@ pipeline {
         stage('Deploy to Test') {
             steps {
                 git 'https://github.com/alikayim/magento.git'
-                }
+                
             }
         }
         stage('Running Hackathon Tests') {
