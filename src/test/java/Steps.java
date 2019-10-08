@@ -17,10 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -208,9 +205,33 @@ public class Steps {
                 int y = i + 1;
                 webDriver.findElement(By.xpath("//*[@id=\"product-comparison\"]/tbody[1]/tr/td[" + y + "]/div[3]/div[2]/a")).click();
             }
-
         }
     }
 
+    @And("I create a user")
+    public void createUser() throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        Random random = new Random();
+        clickText("Create an Account");
+        fill("createFirstName","Test");
+        fill("createLastName","User");
+        fill("createMail","test"+ Integer.toString(random.nextInt()) + "@test.com");
+        fill("createPass","Test1234");
+        fill("confirmPass","Test1234");
+        clickElement("createButton");
+//        JSONObject obj = new JSONObject();
+//        obj.put("username", "test");
+//        obj.put("Author", "App Shah");
+//        JSONArray company = new JSONArray();
+//        company.add("Compnay: eBay");
+//        company.add("Compnay: Paypal");
+//        company.add("Compnay: Google");
+//        obj.put("Company List", company);
+//        try (FileWriter file = new FileWriter("src/test/resources/config/tempusers.json")) {
+//            file.write(obj.toJSONString());
+//            System.out.println("Successfully Copied JSON Object to File...");
+//            System.out.println("\nJSON Object: " + obj);
+//        }
+    }
 
 }

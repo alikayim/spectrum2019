@@ -1,11 +1,17 @@
 {
   "elements": {
-    "loginMail": "email",
-    "loginPass": "pass",
-    "loginButton": "send2",
     "Woman": "ui-id-4",
     "Tops": "ui-id-9",
     "Jacket": "ui-id-11",
+    "loginMail": "email",
+    "loginPass": "pass",
+    "loginButton": "send2",
+    "createFirstName": "firstname",
+    "createLastName": "lastname",
+    "createMail": "email_address",
+    "createPass": "password",
+    "confirmPass": "password-confirmation",
+    "createButton": "//*[@id=\"form-validate\"]/div/div[1]/button"
     "Sorter": "//*[@id=\"maincontent\"]/div[3]/div[1]/div[2]/div[4]/select",
     "first product": "//*[@id=\"maincontent\"]/div[3]/div[1]/div[3]/ol/li[1]",
     "first product compare": "//*[@id=\"maincontent\"]/div[3]/div[1]/div[3]/ol/li[1]/div/div/div[4]/div/div[2]/a[2]",
