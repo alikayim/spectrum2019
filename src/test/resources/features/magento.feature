@@ -4,24 +4,24 @@ Feature: Magento Feature
     Given I open "magento" page
     And I maximize window
     And I create a user
-    And I select Woman element
-    And I select Tops element
-    And I click Jacket element
-    And I select "price" in Sorter
-    And I select first product element
-    And I click first product compare element
-    #And I see compare element count "x"
-    And I select medium product element
-    And I click medium product compare element
-    And I click sorter direction element
-    And I select first product element
-    And I click first product compare element
-    And I click Compare element
-    And I select cheapest of product 1, product 2, product 3
-    And I click wish product element
-    And I click size element
-    And I click color element
-    And I click product add to cart element
+#    And I select Woman element
+#    And I select Tops element
+#    And I click Jacket element
+#    And I select "price" in Sorter
+#    And I select first product element
+#    And I click first product compare element
+#    #And I see compare element count "x"
+#    And I select medium product element
+#    And I click medium product compare element
+#    And I click sorter direction element
+#    And I select first product element
+#    And I click first product compare element
+#    And I click Compare element
+#    And I select cheapest of product 1, product 2, product 3
+#    And I click wish product element
+#    And I click size element
+#    And I click color element
+#    And I click product add to cart element
 
     And I select Gear element
     And I click Fitness Equipment element
@@ -48,7 +48,7 @@ Feature: Magento Feature
       | Phone   | 02122121212                        |
     And I click Next element
     And I click biling check element
-    And I select "TR" in Country
+    And I select "TR" in Biling Country
     And I fill:
       | Biling Company | Home              |
       | Biling Street  | Maltepe - Cevizli |

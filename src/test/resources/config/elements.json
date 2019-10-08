@@ -48,15 +48,15 @@
     "Country": "//*[@id=\"shipping-new-address-form\"]/div[8]/div/select",
     "Phone": "//*[@id=\"shipping-new-address-form\"]/div[9]/div/input",
     "Next": "//*[@id=\"shipping-method-buttons-container\"]/div/button",
-    "Placer Order": "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[4]/div/button",
-    "biling check" : "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/div[1]/label",
-    "Biling Company" : "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/fieldset/div[2]/div/form/fieldset/div[3]/div/input",
+    "Place Order": "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[4]/div/button",
+    "biling check": "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/div[1]/label",
+    "Biling Company": "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/fieldset/div[2]/div/form/fieldset/div[3]/div/input",
     "Biling Street": "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/fieldset/div[2]/div/form/fieldset/fieldset/div/div[1]/div/input",
     "Biling City": "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/fieldset/div[2]/div/form/fieldset/div[4]/div/input",
     "Biling State": "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/fieldset/div[2]/div/form/fieldset/div[6]/div/input",
-    "Biling Zip": "///*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/fieldset/div[2]/div/form/fieldset/div[7]/div",
+    "Biling Zip": "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/fieldset/div[2]/div/form/fieldset/div[7]/div/input",
     "Biling Country": "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/fieldset/div[2]/div/form/fieldset/div[8]/div/select",
-    "Biling Phone": "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/fieldset/div[2]/div/form/fieldset/div[9]/div",
-    "Update" : "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/fieldset/div[3]/div/button[1]"
+    "Biling Phone": "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/fieldset/div[2]/div/form/fieldset/div[9]/div/input",
+    "Update": "//*[@id=\"checkout-payment-method-load\"]/div/div/div[2]/div[2]/div[2]/div/fieldset/div[3]/div/button[1]"
   }
 }

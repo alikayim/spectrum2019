@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -30,7 +31,8 @@ import static org.hamcrest.Matchers.*;
 public class Steps {
     WebDriver webDriver;
     Logger logger = LoggerFactory.getLogger(Steps.class);
-    ChromeOptions options;
+    ChromeOptions chromeOptions;
+    FirefoxOptions firefoxOptions;
 
 
     @Given("^I open \"([^\"]*)\" page$")
@@ -41,12 +43,12 @@ public class Steps {
         String url = getPropertyKey("web.url");
         if (driverType.equals("CHROME")) {
             if (headless == "true") {
-                options = new ChromeOptions();
-                options.addArguments("--headless");
-                options.addArguments("--disable-gpu");
-                options.addArguments("--no-sandbox");
+                chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--headless");
+                chromeOptions.addArguments("--disable-gpu");
+                chromeOptions.addArguments("--no-sandbox");
                 WebDriverManager.chromedriver().setup();
-                webDriver = new ChromeDriver(options);
+                webDriver = new ChromeDriver(chromeOptions);
 
             } else {
                 WebDriverManager.chromedriver().setup();
@@ -54,8 +56,16 @@ public class Steps {
             }
 
         } else if (driverType.equals("FIREFOX")) {
-            WebDriverManager.firefoxdriver().setup();
-            webDriver = new FirefoxDriver();
+            if (headless == "true") {
+                firefoxOptions = new FirefoxOptions();
+                firefoxOptions.setHeadless(true);
+                WebDriverManager.firefoxdriver().setup();
+                webDriver = new FirefoxDriver();
+            } else {
+                WebDriverManager.firefoxdriver().setup();
+                webDriver = new FirefoxDriver();
+            }
+
         } else {
             logger.error("Invalid driver type");
         }
