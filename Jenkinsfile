@@ -21,6 +21,7 @@ pipeline {
                     ls -lrt
                     pwd
                     docker-compose up -d
+                    sleep 5
                     docker exec -it spectrum-pipeline_master_web_1 install-magento
                     docker exec -it spectrum-pipeline_master_web_1 install-sampledata
                     """
