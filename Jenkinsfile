@@ -46,7 +46,7 @@ pipeline {
                             testDataPublishers: [
                                     jiraTestResultReporter(
                                             configs: [
-                                                    jiraStringField(fieldKey: 'summary', value: '${DEFAULT_SUMMARY}'),
+                                                    jiraStringField(fieldKey: 'summary', value: 'Tests Failure!'),
                                                     jiraStringField(fieldKey: 'description', value: '${DEFAULT_DESCRIPTION}'),
                                                     jiraStringArrayField(fieldKey: 'labels', values: [jiraArrayEntry(value: 'Jenkins'), jiraArrayEntry(value:'Integration')])
                                             ],
