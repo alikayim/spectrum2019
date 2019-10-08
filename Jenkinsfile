@@ -11,12 +11,15 @@ pipeline {
         }
         stage('Deploy to Test') {
             agent {
-                label 'spectrum-docker'
+                label 'azureserver'
             }
             steps {
                 git 'https://github.com/alikayim/magento.git'
                 script{
-                    sh 'ls -lrt'
+                    sh """
+                    ls -lrt
+                    //docker-compose up -d
+                    """
                 }
                 
             }
