@@ -10,6 +10,9 @@ pipeline {
             }
         }
         stage('Deploy to Test') {
+            agent {
+                label 'spectrum-docker'
+            }
             steps {
                 git 'https://github.com/alikayim/magento.git'
                 
