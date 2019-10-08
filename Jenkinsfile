@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     echo "This is a dummy stage!"
-                    sleep 5
+                    
                 }
             }
         }
